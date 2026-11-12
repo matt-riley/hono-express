@@ -21,6 +21,7 @@ jobs:
     with:
       working-directory: express
       run-lint: false
+      run-build: true
       run-test: true
 
   hono:
@@ -34,4 +35,5 @@ jobs:
     with:
       working-directory: hono
       run-lint: false
+      run-build: true
       run-test: true
