@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  express:
+    permissions:
+      contents: read
+      packages: read
+    concurrency:
+      group: ${{ github.workflow }}:${{ github.ref }}:express
+      cancel-in-progress: true
+    uses: matt-riley/matt-riley-ci/.github/workflows/aube-ci.yml@002d16c00bc74ebced433f0a16187c9b13451194 # v4.2.0
+    with:
+      working-directory: express
+      run-lint: false
+      run-test: true
+
+  hono:
+    permissions:
+      contents: read
+      packages: read
+    concurrency:
+      group: ${{ github.workflow }}:${{ github.ref }}:hono
+      cancel-in-progress: true
+    uses: matt-riley/matt-riley-ci/.github/workflows/aube-ci.yml@002d16c00bc74ebced433f0a16187c9b13451194 # v4.2.0
+    with:
+      working-directory: hono
+      run-lint: false
+      run-test: true
